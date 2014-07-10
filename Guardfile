@@ -5,8 +5,9 @@ guard 'spork' do
 end
 
 guard 'rspec',
-      :cmd          => "rspec --drb",
-      :all_on_start => true do
+      :cmd            => "rspec --drb",
+      :all_on_start   => true,
+      :all_after_pass => true do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/})               { "spec" }
 end
