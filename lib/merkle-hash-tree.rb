@@ -85,7 +85,12 @@ class MerkleHashTree
 			      "subtree goes backwards (#{subtree.inspect})"
 		end
 
-		if subtree.size == 1
+		if @data.respond_to?(:mht_cache_get) and h = @data.mht_cache_get(subtree.inspect)
+			return h
+		end
+
+		# No caching, or not in the cache... recalculate!
+		h = if subtree.size == 1
 			# We're at a leaf!
 			leaf_hash(subtree.min)
 		else
@@ -93,6 +98,12 @@ class MerkleHashTree
 
 			node_hash(head((0..k-1)+subtree.min), head(subtree.min+k..subtree.max))
 		end
+
+		if @data.respond_to?(:mht_cache_set)
+			@data.mht_cache_set(subtree.inspect, h)
+		end
+
+		h
 	end
 
 	# Generate an "audit proof" for a list item.
@@ -232,11 +243,6 @@ class MerkleHashTree
 		else
 			k = power_of_2_smaller_than(n.size)
 
-# Translation notes (RFC to reality)
-#
-#  * 0:k => (0..k-1)+n.min
-#  * k:n => ((n.min+k)..n.max)
-
 			if m <= k+n.min
 				subproof(m, (0..k-1)+n.min, b) + [head((n.min+k)..n.max)]
 			else
@@ -250,7 +256,17 @@ class MerkleHashTree
 	end
 
 	def leaf_hash(n)
-		digest("\0" + @data[n].to_s)
+		if @data[n].respond_to?(:mht_leaf_hash) and h = @data[n].mht_leaf_hash
+			return h
+		end
+
+		h = digest("\0" + @data[n].to_s)
+
+		if @data[n].respond_to?(:mht_leaf_hash=)
+			@data[n].mht_leaf_hash = h
+		end
+
+		h
 	end
 
 	def node_hash(h1, h2)

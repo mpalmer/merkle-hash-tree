@@ -26,6 +26,6 @@ Gem::Specification.new do |s|
 	# Needed for guard
 	s.add_development_dependency 'rb-inotify', '~> 0.9'
 	s.add_development_dependency 'rdoc'
-	s.add_development_dependency 'rspec'
+	s.add_development_dependency 'rspec', '~> 2.11'
 	s.add_development_dependency 'rspec-mocks'
 end
