@@ -29,17 +29,17 @@ class MerkleHashTree
 		@data = data_access
 		unless @data.respond_to?(:[])
 			raise ArgumentError,
-			      "data_access (#{@data}) does not implement #[]"
+			      "data_access (#{@data.inspect}) does not implement #[]"
 		end
 		unless @data.respond_to?(:length)
 			raise ArgumentError,
-			      "data_access (#{@data}) does not implement #length"
+			      "data_access (#{@data.inspect}) does not implement #length"
 		end
 
 		@digest = hash_class
 		unless @digest.respond_to?(:digest)
 			raise ArgumentError,
-			      "hash_class (#{@digest}) does not implement #digest"
+			      "hash_class (#{@digest.inspect}) does not implement #digest"
 		end
 	end
 
