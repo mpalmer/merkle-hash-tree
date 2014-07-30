@@ -119,8 +119,8 @@ The complete interface definition is given in `doc/DAI.md`, for those who
 wish to implement their own interface.  Essentially, you *must* to implement
 `[](n)`, which returns the `n`th entry in the (zero-indexed) list, as well
 as `length`, which returns the current size of the list.  You can also
-implement `cache_set(n1, n2, s)` and `cache_get(n1, n2)`, which set and get
-entries in the cache of node values.  If you don't implement these, then
+implement `mht_cache_set(key, val)` and `mht_cache_get(key)`, which set and
+get entries in the cache of node values.  If you don't implement these, then
 `MerkleHashTree` will need to recalculate every hash in the tree repeatedly
 for most every operation -- which will be *very* slow for anything other
 than the most trivial result.
