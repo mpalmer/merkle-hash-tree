@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 	s.summary = "An RFC6962-compliant implementation of Merkle Hash Trees"
 	s.authors = ["Matt Palmer"]
 
-	s.extra_rdoc_files = ["README.md"]
+	s.extra_rdoc_files = ["README.md", "doc/DAI.md"]
 	s.files = `git ls-files`.split("\n")
 
 	s.add_runtime_dependency "git-version-bump"
