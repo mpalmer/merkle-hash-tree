@@ -23,7 +23,7 @@ require 'rdoc/task'
 
 Rake::RDocTask.new do |rd|
 	rd.main = "README.md"
-	rd.title = 'lvmsync'
+	rd.title = 'merkle-hash-tree'
 	rd.rdoc_files.include("README.md", "lib/**/*.rb")
 end
 
