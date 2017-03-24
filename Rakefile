@@ -1,3 +1,5 @@
+exec(*(["bundle", "exec", $PROGRAM_NAME] + ARGV)) if ENV['BUNDLE_GEMFILE'].nil?
+
 require 'rubygems'
 require 'bundler'
 
