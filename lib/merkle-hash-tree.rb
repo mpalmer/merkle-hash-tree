@@ -273,11 +273,8 @@ class MerkleHashTree
 		digest("\x01" + h1 + h2)
 	end
 
-	# This is almost certainly horribly inefficient, but my math skills have
-	# atrophied embarrassingly
 	def power_of_2_smaller_than(n)
 		raise ArgumentError, "Too small, Jim" if n < 2
-		s = (n-1).to_s(2).length-1
-		2**s
+		2 << ((n-1).bit_length - 2)
 	end
 end
