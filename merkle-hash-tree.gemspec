@@ -21,11 +21,9 @@ Gem::Specification.new do |s|
 	s.add_development_dependency 'guard-spork'
 	s.add_development_dependency 'guard-rspec'
 	s.add_development_dependency 'plymouth'
-	s.add_development_dependency 'pry-byebug'
 	s.add_development_dependency 'rake', '~> 10.4', '>= 1.0.4.2'
 	# Needed for guard
 	s.add_development_dependency 'rb-inotify', '~> 0.9'
-	s.add_development_dependency 'rdoc'
 	s.add_development_dependency 'rspec', '~> 2.11'
 	s.add_development_dependency 'rspec-mocks'
 end
