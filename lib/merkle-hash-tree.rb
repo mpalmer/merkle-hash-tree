@@ -173,7 +173,7 @@ class MerkleHashTree
 			if item < k
 				audit_proof(item, (0..k-1)+subtree.min) + [head(subtree.min+k..subtree.max)]
 			else
-				audit_proof(subtree.min+item-k, subtree.min+k..subtree.max) +
+				audit_proof(item-k, subtree.min+k..subtree.max) +
 				  [head((0..k-1)+subtree.min)]
 			end
 		end

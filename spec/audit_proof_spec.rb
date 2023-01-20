@@ -113,4 +113,27 @@ describe "MerkleHashTree#audit_proof" do
 			expect(mht.audit_proof(25)).to eq(%w{y qrstuvwx abcdefghijklmnop})
 		end
 	end
+
+	context "with data from issue #2" do
+		let(:data) do
+			[].tap do |mht_data|
+				mht_data << {sender_id: 1, receiver_id: 5, balance_transaction_id: 101, amount: 10, fee: 0.05} #0
+				mht_data << {sender_id: 2, receiver_id: 6, balance_transaction_id: 102, amount: 20, fee: 0.05} #1
+				mht_data << {sender_id: 3, receiver_id: 7, balance_transaction_id: 103, amount: 30, fee: 0.05} #2
+				mht_data << {sender_id: 4, receiver_id: 8, balance_transaction_id: 104, amount: 40, fee: 0.05} #3
+				mht_data << {user_id: 1, balance: 1000} #4
+				mht_data << {user_id: 2, balance: 2000} #5
+				mht_data << {user_id: 3, balance: 3000} #6
+				mht_data << {user_id: 4, balance: 4000} #7
+				mht_data << {user_id: 5, balance: 5000} #8
+				mht_data << {user_id: 6, balance: 6000} #9
+				mht_data << {user_id: 7, balance: 7000} #10
+				mht_data << {user_id: 8, balance: 8000} #11
+			end
+		end
+
+		it "produces unique audit proofs" do
+			expect(mht.audit_proof(6)).to_not eq(mht.audit_proof(7))
+		end
+	end
 end
